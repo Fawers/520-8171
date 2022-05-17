@@ -67,18 +67,43 @@ class BusEmMovimento(BusaoError):
 
 def main():
     bus = Onibus()
-    # bus.desembarcar(45)
+
+    try:
+        bus.desembarcar(45)
+
+    except Vazio:
+        print("impossível desembarcar de ônibus vazio")
+
+    except BusaoError as be:
+        print("Busao error:", be)
+
+    # por que não chega aqui?
+    except Superlotacao as sl:
+        print("superlotação:", *sl.args)
+
     bus.embarcar(10)
     bus.acelerar(80)
     print(bus.__dict__)
     bus.frear(40)
     print(bus.__dict__)
-    # bus.embarcar(5)
-    # bus.desembarcar(10)
+
+    try:
+        bus.embarcar(5)
+        bus.desembarcar(10)
+
+    except BusEmMovimento as bem:
+        print(bem.__class__.__name__, *bem.args)
+
     bus.frear(40)
     print(bus.__dict__)
     bus.desembarcar(10)
-    bus.embarcar(40)
+
+    try:
+        bus.embarcar(47)
+
+    except Superlotacao as sl:
+        print(f"não foi possível embarcar {sl.args[0]} passageiros")
+
     print(bus.__dict__)
 
 if __name__ == '__main__':

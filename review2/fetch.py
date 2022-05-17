@@ -6,6 +6,8 @@ API_ENDPOINT = 'https://rickandmortyapi.com/api'
 API_CHARACTER_ENDPOINT = f'{API_ENDPOINT}/character'
 API_EPISODE_ENDPOINT = f'{API_ENDPOINT}/episode'
 
+# unittest.mock.MagicMock
+
 def rick_and_morty_characters():
     response = requests.get(API_CHARACTER_ENDPOINT)
     data = response.json()
